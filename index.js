@@ -1,41 +1,4 @@
-const board_cells = [
-  "AA",
-  "AD",
-  "AF",
-  "AG",
-  "AV",
-  "AX",
-  "DA",
-  "DD",
-  "DF",
-  "DG",
-  "DV",
-  "DX",
-  "FA",
-  "FD",
-  "FF",
-  "FG",
-  "FV",
-  "FX",
-  "GA",
-  "GD",
-  "GF",
-  "GG",
-  "GV",
-  "GX",
-  "VA",
-  "VD",
-  "VF",
-  "VG",
-  "VV",
-  "VX",
-  "XA",
-  "XD",
-  "XF",
-  "XG",
-  "XV",
-  "XX",
-];
+const cells_generator_helper = ["A", "D", "F", "G", "V", "X"];
 const number_chars = {
   A: 1,
   B: 2,
@@ -146,62 +109,48 @@ const adfgvxDecipher = (text, key, board) => {
 
 const generate_board = (codeword) => {
   let result = {};
-  let current_cell = 0;
+  let row = 0;
+  let column = 0;
   for (const char of codeword.toUpperCase()) {
     if (!Object.keys(result).includes(char)) {
-      result[char] = board_cells[current_cell];
-      current_cell++;
+      result[char] =
+        cells_generator_helper[row] + cells_generator_helper[column];
+      column++;
+      if (column == cells_generator_helper.length) {
+        column = 0;
+        row++;
+      }
       if (Object.keys(number_chars).includes(char)) {
-        result[number_chars[char]] = board_cells[current_cell];
-        current_cell++;
+        result[number_chars[char]] =
+          cells_generator_helper[row] + cells_generator_helper[column];
+        column++;
+        if (column == cells_generator_helper.length) {
+          column = 0;
+          row++;
+        }
       }
     }
   }
   for (const char of alphabet) {
     if (!Object.keys(result).includes(char)) {
-      result[char] = board_cells[current_cell];
-      current_cell++;
+      result[char] =
+        cells_generator_helper[row] + cells_generator_helper[column];
+      column++;
+      if (column == cells_generator_helper.length) {
+        column = 0;
+        row++;
+      }
       if (Object.keys(number_chars).includes(char)) {
-        result[number_chars[char]] = board_cells[current_cell];
-        current_cell++;
+        result[number_chars[char]] =
+          cells_generator_helper[row] + cells_generator_helper[column];
+        column++;
+        if (column == cells_generator_helper.length) {
+          column = 0;
+          row++;
+        }
       }
     }
   }
 
   return result;
 };
-
-const test_board = {
-  B: "AA",
-  T: "AD",
-  A: "AF",
-  L: "AG",
-  P: "AX",
-  D: "DA",
-  H: "DD",
-  O: "DF",
-  Z: "DG",
-  K: "DX",
-  Q: "FA",
-  F: "FD",
-  V: "FF",
-  S: "FG",
-  N: "FX",
-  G: "GA",
-  J: "GD",
-  I: "GD",
-  C: "GF",
-  U: "GG",
-  X: "GX",
-  M: "XA",
-  R: "XD",
-  E: "XF",
-  W: "XG",
-  Y: "XX",
-};
-
-console.log(adfgvxCipher("Tajna wiadomosc", "haslo", test_board));
-console.log(
-  adfgvxDecipher("DFGDAGADXFXGFADDFGGFAFFXAXGADF", "haslo", test_board)
-);
-console.log(generate_board("nachtbommenwerper"));
