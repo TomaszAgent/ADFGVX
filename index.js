@@ -1,9 +1,9 @@
 import handleRequest from "./script.js";
 
-const textInput = document.querySelector('input[name="text"]');
+const textInput = document.querySelector('textarea[name="text"]');
 const keywordInput = document.querySelector('input[name="keyword"]');
 const codewordInput = document.querySelector('input[name="codeword"]');
-const resultInput = document.querySelector('input[name="result"]');
+const resultInput = document.querySelector('textarea[name="result"]');
 const cipherButton = document.querySelector('button[name="cipher"]');
 const decipherButton = document.querySelector('button[name="decipher"]');
 

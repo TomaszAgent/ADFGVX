@@ -3,7 +3,8 @@
   flex-direction: column;
 }
 
-input {
+input,
+textarea {
   border-radius: 10px;
   border: 1px solid grey;
   margin-bottom: 1vh;
@@ -11,10 +12,13 @@ input {
   text-align: start;
 }
 
-.inputs > input[name="text"],
-input[name="result"] {
+.inputs > textarea[name="text"],
+textarea[name="result"] {
+  text-wrap: wrap;
   height: 20vh;
   width: 100%;
+  resize: none;
+  margin-bottom: 1vh;
 }
 
 .buttons {
