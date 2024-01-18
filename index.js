@@ -29,6 +29,39 @@ const adfgvxCipher = (text, key, board) => {
   for (const obj_key of obj_keys.sort()) {
     result += temp_obj[obj_key];
   }
+
+  return result;
+};
+
+const adfgvxDecipher = (text, key, board) => {
+  let temp_obj = {};
+  let sorted_key = key.split("").sort();
+  const column_lenght = text.length / key.length;
+  for (const index in sorted_key) {
+    temp_obj[sorted_key[index]] = text.slice(
+      index * column_lenght,
+      (+index + 1) * column_lenght
+    );
+  }
+
+  let temp_text = "";
+  let row = 0;
+  let column = 0;
+  while (temp_text.length != text.length) {
+    temp_text += temp_obj[key[column]][row];
+    column++;
+    if (column == key.length) {
+      column = 0;
+      row++;
+    }
+  }
+
+  let result = "";
+  for (let i = 0; i < temp_text.length; i += 2) {
+    const char = temp_text.slice(i, i + 2);
+    result += Object.keys(board).find((board_key) => board[board_key] == char);
+  }
+
   return result;
 };
 
@@ -62,3 +95,6 @@ const test_board = {
 };
 
 console.log(adfgvxCipher("Tajna wiadomosc", "haslo", test_board));
+console.log(
+  adfgvxDecipher("DFGDAGADXFXGFADDFGGFAFFXAXGADF", "haslo", test_board)
+);
