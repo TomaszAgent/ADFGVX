@@ -1,0 +1,22 @@
+.inputs {
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  border-radius: 10px;
+  border: 1px solid grey;
+  margin-bottom: 1vh;
+  height: 3vh;
+  text-align: start;
+}
+
+.inputs > input[name="text"],
+input[name="result"] {
+  height: 20vh;
+  width: 100%;
+}
+
+.buttons {
+  margin-bottom: 1vh;
+}
