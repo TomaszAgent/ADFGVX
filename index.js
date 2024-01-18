@@ -1,4 +1,4 @@
-import handleRequest from "./script";
+import handleRequest from "./script.js";
 
 const textInput = document.querySelector('input[name="text"]');
 const keywordInput = document.querySelector('input[name="keyword"]');
@@ -9,25 +9,25 @@ const decipherButton = document.querySelector('button[name="decipher"]');
 
 const handleCipherButtonClick = (event) => {
   event.preventDefault();
-  const text = textInput.textContent;
-  const keyword = keywordInput.textContent;
-  const codeword = codewordInput.textContent;
+  const text = textInput.value;
+  const keyword = keywordInput.value;
+  const codeword = codewordInput.value;
   const result = handleRequest(text, codeword, keyword, "cipher");
-  resultInput.textContent = result;
+  resultInput.value = result;
 };
 
 const handleDecipherButtonClick = (event) => {
   event.preventDefault();
-  const text = textInput.textContent;
-  const keyword = keywordInput.textContent;
-  const codeword = codewordInput.textContent;
+  const text = textInput.value;
+  const keyword = keywordInput.value;
+  const codeword = codewordInput.value;
   if (text.length % keyword.length != 0) {
     window.alert("enter correct text");
     return;
   }
   const result = handleRequest(text, codeword, keyword, "decipher");
-  resultInput.textContent = result;
+  resultInput.value = result;
 };
 
-cipherButton.addEventListener("onclick", handleCipherButtonClick);
-decipherButton.addEventListener("onclick", handleDecipherButtonClick);
+cipherButton.addEventListener("click", handleCipherButtonClick);
+decipherButton.addEventListener("click", handleDecipherButtonClick);

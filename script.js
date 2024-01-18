@@ -157,9 +157,9 @@ const generate_board = (codeword) => {
 
 const handleRequest = (text, codeword, key, operation) => {
   switch (operation) {
-    case "encrypt":
+    case "cipher":
       return adfgvxCipher(text, key, generate_board(codeword));
-    case "decrypt":
+    case "decipher":
       return adfgvxDecipher(text, key, generate_board(codeword));
   }
 };
