@@ -3,16 +3,19 @@ const adfgvxCipher = (text, key, board) => {
   for (const char of text.replace(/\s+/g, "")) {
     temp_text += board[char.toUpperCase()];
   }
+
   let temp_obj = {};
   for (const char of key.replace(/\s+/g, "")) {
     temp_obj[char] = "";
   }
+
   const obj_keys = Object.keys(temp_obj);
   let current_key = 0;
   for (const char of temp_text) {
     temp_obj[obj_keys[current_key]] += char;
     current_key = current_key == obj_keys.length - 1 ? 0 : current_key + 1;
   }
+
   let current_filler = board["X"][0];
   for (const obj_key of obj_keys) {
     if (temp_obj[obj_key].length != temp_obj[obj_keys[0]].length) {
@@ -21,6 +24,7 @@ const adfgvxCipher = (text, key, board) => {
         current_filler == board["X"][0] ? board["X"][1] : board["X"][0];
     }
   }
+
   let result = "";
   for (const obj_key of obj_keys.sort()) {
     result += temp_obj[obj_key];
