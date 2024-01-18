@@ -6,7 +6,8 @@
     <title>ADFGVX</title>
     <link rel="icon" href="/favicon.png" />
     <link rel="stylesheet" href="index.css" />
-    <script defer src="./index.js"></script>
+    <script type="module" defer src="./index.js"></script>
+    <script type="module" defer src="./script.js"></script>
   </head>
   <body>
     <div class="inputs">
@@ -15,8 +16,8 @@
       <input type="text" placeholder="keyword" name="keyword" />
     </div>
     <div class="buttons">
-      <button>Cipher</button>
-      <button>Decipher</button>
+      <button name="decipher">Cipher</button>
+      <button name="cipher">Decipher</button>
     </div>
     <input type="text" placeholder="result" name="result" disabled />
   </body>
