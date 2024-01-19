@@ -120,7 +120,10 @@ const generate_board = (codeword) => {
         column = 0;
         row++;
       }
-      if (Object.keys(number_chars).includes(char)) {
+      if (
+        Object.keys(number_chars).includes(char) &&
+        !codeword.includes(number_chars[char])
+      ) {
         result[number_chars[char]] =
           cells_generator_helper[row] + cells_generator_helper[column];
         column++;
