@@ -7,7 +7,10 @@ const adfgvxCipher = (text, key, board) => {
   }
 
   let temp_obj = {};
-  for (const char of key.replace(/\s+/g, "")) {
+  for (let char of key.replace(/\s+/g, "")) {
+    while (Object.keys(temp_obj).includes(char)) {
+      char += char;
+    }
     temp_obj[char] = "";
   }
 
@@ -40,17 +43,31 @@ const adfgvxDecipher = (text, key, board) => {
   let sorted_key = key.split("").sort();
   const column_lenght = text.length / key.length;
   for (const index in sorted_key) {
-    temp_obj[sorted_key[index]] = text.slice(
+    let char = sorted_key[index];
+    while (Object.keys(temp_obj).includes(char)) {
+      char += char;
+    }
+    temp_obj[char] = text.slice(
       index * column_lenght,
       (+index + 1) * column_lenght
     );
+  }
+
+  const temp_key_chars = key.split("");
+  let key_chars = [];
+  for (let index in temp_key_chars) {
+    let char = temp_key_chars[index];
+    while (key_chars.includes(char)) {
+      char += char;
+    }
+    key_chars.push(char);
   }
 
   let temp_text = "";
   let row = 0;
   let column = 0;
   while (temp_text.length != text.length) {
-    temp_text += temp_obj[key[column]][row];
+    temp_text += temp_obj[key_chars[column]][row];
     column++;
     if (column == key.length) {
       column = 0;
@@ -71,26 +88,23 @@ const generate_board = (codeword) => {
   let result = {};
   let row = 0;
   let column = 0;
-  for (const char of codeword.toUpperCase()) {
-    if (!Object.keys(result).includes(char)) {
-      result[char] =
+  for (const char of new Set(codeword.toUpperCase().split(""))) {
+    result[char] = cells_generator_helper[row] + cells_generator_helper[column];
+    column++;
+    if (column == cells_generator_helper.length) {
+      column = 0;
+      row++;
+    }
+    if (
+      Object.keys(number_chars).includes(char) &&
+      !codeword.includes(number_chars[char])
+    ) {
+      result[number_chars[char]] =
         cells_generator_helper[row] + cells_generator_helper[column];
       column++;
       if (column == cells_generator_helper.length) {
         column = 0;
         row++;
-      }
-      if (
-        Object.keys(number_chars).includes(char) &&
-        !codeword.includes(number_chars[char])
-      ) {
-        result[number_chars[char]] =
-          cells_generator_helper[row] + cells_generator_helper[column];
-        column++;
-        if (column == cells_generator_helper.length) {
-          column = 0;
-          row++;
-        }
       }
     }
   }
