@@ -1,7 +1,7 @@
 import handleRequest from "./script.js";
 import { cells_generator_helper } from "./constants.js";
 
-const isAlphanumeric = (str) => /^[a-zA-Z0-9]+$/.test(str);
+const isAlphanumeric = (str) => /^[a-zA-Z0-9]+$/.test(str.replace(/\s+/g, ""));
 
 const textInput = document.querySelector('textarea[name="text"]');
 const keywordInput = document.querySelector('input[name="keyword"]');
