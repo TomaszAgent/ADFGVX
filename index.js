@@ -15,13 +15,18 @@ const handleCipherButtonClick = (event) => {
   const text = textInput.value;
   const keyword = keywordInput.value;
   const codeword = codewordInput.value;
+
   if (!isAlphanumeric(text)) {
     window.alert("enter correct text");
   }
-  if (!isAlphanumeric(codeword)) {
+  if (codeword !== "" && !isAlphanumeric(codeword)) {
     window.alert("enter correct codeword");
     return;
   }
+  if (keyword.lenght <= 0) {
+    window.alert("enter keyword");
+  }
+
   const result = handleRequest(text, codeword, keyword, "cipher");
   resultInput.value = result;
 };
@@ -31,17 +36,22 @@ const handleDecipherButtonClick = (event) => {
   const text = textInput.value;
   const keyword = keywordInput.value;
   const codeword = codewordInput.value;
+
   if (
     text.length % keyword.length != 0 ||
-    !text.split("").all((char) => cells_generator_helper.includes(char))
+    !text.split("").every((char) => cells_generator_helper.includes(char))
   ) {
     window.alert("enter correct text");
     return;
   }
-  if (!isAlphanumeric(codeword)) {
+  if (codeword !== "" && !isAlphanumeric(codeword)) {
     window.alert("enter correct codeword");
     return;
   }
+  if (keyword.lenght <= 0) {
+    window.alert("enter keyword");
+  }
+
   const result = handleRequest(text, codeword, keyword, "decipher");
   resultInput.value = result;
 };
