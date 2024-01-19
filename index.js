@@ -23,7 +23,7 @@ const handleCipherButtonClick = (event) => {
     window.alert("enter correct codeword");
     return;
   }
-  if (keyword.lenght <= 0) {
+  if (keyword === "") {
     window.alert("enter keyword");
   }
 
@@ -48,7 +48,7 @@ const handleDecipherButtonClick = (event) => {
     window.alert("enter correct codeword");
     return;
   }
-  if (keyword.lenght <= 0) {
+  if (keyword === "") {
     window.alert("enter keyword");
   }
 
